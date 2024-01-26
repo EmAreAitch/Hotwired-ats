@@ -38,9 +38,9 @@ async function rebuild() {
 	  );
 	}).listen(8082);
 
-	let result = await esbuild.build({
+	let result = await esbuild.context({
 	  ...config,
-	  incremental: true,
+	  // incremental: true,
 	  banner: {
 	    js: ' (() => new EventSource("http://localhost:8082").onmessage = () => location.reload())();',
 	  },
@@ -48,7 +48,7 @@ async function rebuild() {
 
 	chokidar.watch(watchDirectories).on('all', (event, path) => {
 	  if (path.includes("javascript")) {
-	    result.rebuild()
+	    await result.rebuild()
 	  }
 	  clients.forEach((res) => res.write('data: update\n\n'))
 	  clients.length = 0
@@ -58,7 +58,7 @@ async function rebuild() {
 if (process.argv.includes("--rebuild")) {
   rebuild()
 } else {
-  esbuild.build({
+  await esbuild.context({
     ...config,
     minify: process.env.RAILS_ENV == "production",
   }).catch(() => process.exit(1));
