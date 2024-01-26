@@ -65,3 +65,9 @@ end
 
 
 gem "stimulus_reflex", "= 3.5.0.pre8"
+
+gem "devise", "~> 4.9"
+
+gem "haml-rails", "~> 2.1"
+
+gem "html2haml", "~> 2.3"

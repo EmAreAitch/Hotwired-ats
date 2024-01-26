@@ -1,0 +1,28 @@
+.flex.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-lg
+    %h2.mt-6.text-center.text-3xl.font-extrabold.text-gray-900
+      Sign up for Hotwired ATS
+    %p.mt-2.text-center.text-sm.text-gray-600.max-w
+      Already have an account?
+      \#{link_to "Sign in instead", new_user_session_path, class: "font-medium text-blue-600 hover:text-blue-800"}
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-lg
+    .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |form|
+        = render "devise/shared/error_messages", resource: resource
+        = form.fields_for :account do |account_fields|
+          .form-group
+            = account_fields.label :name, "Company Name"
+            = account_fields.text_field :name, autofocus: true
+        .form-group
+          = form.label :email
+          = form.email_field :email, autocomplete: "email"
+        .form-group
+          = form.label :password
+          = form.password_field :password, autocomplete: "new-password"
+          - if @minimum_password_length
+            %p.text-xs.text-gray-500.mt-1.text-right at least 6 characters
+        .form-group
+          = form.label :password_confirmation
+          = form.password_field :password_confirmation, autocomplete: "new-password"
+        %div
+          = form.button "Sign up", class: "btn-primary w-full", data: { disable_with: "Signing up" }

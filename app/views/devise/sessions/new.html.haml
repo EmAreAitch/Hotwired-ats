@@ -1,0 +1,27 @@
+.flex.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-lg
+    %h2.mt-6.text-center.text-3xl.font-extrabold.text-gray-900
+      Sign in to Hotwired ATS
+    %p.mt-2.text-center.text-sm.text-gray-600.max-w
+      Need an account?
+      \#{link_to "Sign up for free", new_user_registration_path, class: "font-medium text-blue-600 hover:text-blue-500"}
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-lg
+    .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |form|
+        .form-group
+          = form.label :email
+          .mt-1
+            = form.email_field :email, autofocus: true, autocomplete: "email"
+        .form-group
+          = form.label :password
+          .mt-1
+            = form.password_field :password, autocomplete: "current-password"
+        - if devise_mapping.rememberable?
+          .flex.items-center.justify-between
+            .flex.items-center.justify-baseline.checkbox-group
+              = form.check_box :remember_me
+              = form.label :remember_me
+            .text-sm
+              = link_to "Forgot your password?", new_user_password_path, class: "font-medium text-blue-600 hover:text-blue-500"
+        %div
+          = form.button "Sign in", class: "btn-primary w-full", data: { disable_with: "Signing in" }

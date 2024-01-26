@@ -79,4 +79,5 @@ Rails.application.configure do
 
   # Add this line
   config.session_store :cache_store, key: "_sessions_development", compress: true, pool_size: 5, expire_after: 1.year
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

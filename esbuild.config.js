@@ -10,6 +10,7 @@ const entryPoints = [
 const watchDirectories = [
   "./app/javascript/**/*.js",
   "./app/views/**/*.html.erb",
+  "./app/views/**/*.html.haml",
   "./app/assets/stylesheets/*.css",
   "./app/assets/stylesheets/*.scss"
 ]
@@ -48,7 +49,7 @@ async function rebuild() {
 
 	chokidar.watch(watchDirectories).on('all', (event, path) => {
 	  if (path.includes("javascript")) {
-	    await result.rebuild()
+	    result.rebuild()
 	  }
 	  clients.forEach((res) => res.write('data: update\n\n'))
 	  clients.length = 0
@@ -58,7 +59,7 @@ async function rebuild() {
 if (process.argv.includes("--rebuild")) {
   rebuild()
 } else {
-  await esbuild.context({
+  esbuild.context({
     ...config,
     minify: process.env.RAILS_ENV == "production",
   }).catch(() => process.exit(1));
