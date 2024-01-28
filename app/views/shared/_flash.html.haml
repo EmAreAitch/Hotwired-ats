@@ -1,0 +1,16 @@
+:javascript
+  flash = #{flash.to_json.html_safe};
+  notyf = new Notyf({
+    position: {x:'right',y:'top'},
+    dismissible: true
+  });
+  flash.forEach(([type, message]) => {
+    if (type == 'alert') {
+      notyf.error(message)
+    } else {
+      notyf.success({
+        message: message,
+        background: 'blue'
+      })
+    }
+  })
