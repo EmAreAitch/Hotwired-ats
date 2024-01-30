@@ -9,12 +9,13 @@
     = action_cable_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-  %body
+  %body{'data-controller'=>'slideover'}
     .flex.flex-col.h-screen.justify-between.px-4.md:px-0
       = render "nav/top_nav"
       %main.mb-auto.w-full.overflow-auto
         .mx-auto.max-w-7xl.md:px-6.lg:px-8.py-8
           = yield
       = render "shared/footer"
+    = render "shared/slideover"
   - if flash.present?
     = render  'shared/flash'

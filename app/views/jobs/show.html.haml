@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @job.title
+%p
+  %b Status:
+  = @job.status
+%p
+  %b Job type:
+  = @job.job_type
+%p
+  %b Location:
+  = @job.location
+%p
+  %b Account:
+  = @job.account
+
+= link_to 'Edit', edit_job_path(@job)
+\|
+= link_to 'Back', jobs_path

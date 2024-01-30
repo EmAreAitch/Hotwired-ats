@@ -5,4 +5,16 @@
 import { application } from "./application"
 
 import HelloController from "./hello_controller"
+
+import SlideoverController from "./slideover_controller"
+import StimulusReflex from 'stimulus_reflex'
+import consumer from '../channels/consumer'
+import controller from '../controllers/application_controller'
+import CableReady from 'cable_ready'
+
 application.register("hello", HelloController)
+application.register("slideover", SlideoverController)
+application.consumer = consumer
+StimulusReflex.initialize(application, { controller, isolate: true })
+StimulusReflex.debug = true
+CableReady.initialize({ consumer })

@@ -12,3 +12,5 @@ mrujs.start({
 })
 
 window.Notyf = Notyf
+import "trix"
+import "@rails/actiontext"

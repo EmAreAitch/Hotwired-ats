@@ -3,3 +3,6 @@
 @import 'tailwindcss/utilities';
 @import 'forms.css';
 @import 'notyf/notyf.min.css';
+@import 'actiontext.css';
+@import "animation.css";
+@import "slideover.css";

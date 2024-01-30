@@ -1,0 +1,26 @@
+= form_with(model: @job,id: 'job-form', html: { class: "space-y-6" }, data: { remote: true }) do |form|
+  - if @job.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@job.errors.count, "error")
+        prohibited this job from being saved:
+      %ul
+        - @job.errors.each do |error|
+          %li= error.full_message
+  .form-group
+    = form.label :title
+    .mt-1
+      = form.text_field :title
+  .form-group
+    = form.rich_text_area :description
+  .form-group
+    = form.label :status
+    = form.select :status, options_for_select(Job.statuses.map{|key, _value| [key.humanize, key]}, @job.status), {}, { class: "mt-1" }
+  .form-group
+    = form.label :job_type
+    = form.select :job_type, options_for_select(Job.job_types.map{|key, _value| [key.humanize, key]}, @job.job_type), {}, { class: "mt-1" }
+  .form-group
+    = form.label :location
+    .mt-1
+      = form.text_field :location
+  = form.submit 'Submit', class: 'btn-primary float-right'
