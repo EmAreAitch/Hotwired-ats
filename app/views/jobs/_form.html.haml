@@ -1,4 +1,4 @@
-= form_with(model: @job,id: 'job-form', html: { class: "space-y-6" }, data: { remote: true }) do |form|
+= form_with(model: @job,id: 'job-form', html: { class: "space-y-6" }, data: { slideover_target: 'form' }) do |form|
   - if @job.errors.any?
     #error_explanation
       %h2
@@ -12,6 +12,7 @@
     .mt-1
       = form.text_field :title
   .form-group
+    = form.label :description
     = form.rich_text_area :description
   .form-group
     = form.label :status

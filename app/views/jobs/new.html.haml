@@ -1,5 +1,8 @@
-%h1 New job
-
-= render 'form'
-
-= link_to 'Back', jobs_path
+= turbo_frame_tag "slideover" do
+  .flex.px-6.justify-between.items-baseline.bg-gray-900
+    %h3#slideover-header.text-xl.text-white Add a new job posting
+    %button.flex.items-center.justify-center.h-12.w-12.rounded-full.focus:outline-none.focus:bg-gray-600.hover:bg-gray-600{"aria-label" => "Close slideover", "data-action" => "slideover#close"}
+      = inline_svg_tag 'close.svg', class: "h-7 w-7 text-white"
+  .mt-4.px-4.text-gray-700
+    #slideover-content
+      = render "form", job: @job
