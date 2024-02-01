@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :applicants
   resources :jobs
   devise_for :users,
   path: '',
@@ -22,6 +23,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     root to: 'devise/sessions#new'
+  end
+  resources :applicants do
+    patch :change_stage, on: :member
   end
 # Snip
 end
