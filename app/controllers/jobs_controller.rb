@@ -11,56 +11,33 @@ class JobsController < ApplicationController
   def show
   end
 
-#   GET /jobs/new
-#   def new
-#     @job = Job.new
-#     html = render_to_string(partial: 'form')
-#     render operations: cable_car.inner_html('#slideover-content', html: html).text_content('#slideover-header', text: 'Post a new job'), content_type: "text/vnd.cable-ready.json"
-#   end
+  # GET /jobs/new
+  def new
+    @job = Job.new
+    html = render_to_string(partial: 'form')
+    render operations: cable_car.inner_html('#slideover-content', html: html).text_content('#slideover-header', text: 'Post a new job'), content_type: "text/vnd.cable-ready.json"
+  end
 
-#   # GET /jobs/1/edit
-#   def edit
-#   end
+  # GET /jobs/1/edit
+  def edit
+  end
 
-#   # POST /jobs or /jobs.json
-
-# def create
-#   @job = Job.new(job_params)
-#   @job.account = current_user.account
-#   if @job.save
-#     html = render_to_string(partial: 'job')
-#     render operations: cable_car
-#       .prepend('#jobs', html: html)
-#       .dispatch_event(name: 'submit:success'), content_type: "text/vnd.cable-ready.json"
-#   else
-#     html = render_to_string(partial: 'form')
-#     render operations: cable_car
-#       .inner_html('#job-form', html: html), status: :unprocessable_entity, content_type: "text/vnd.cable-ready.json"
-#   end
-# end
-
-def new
-  @job = Job.new
-end
+  # POST /jobs or /jobs.json
 
 def create
   @job = Job.new(job_params)
   @job.account = current_user.account
   if @job.save
-    render turbo_stream: turbo_stream.prepend(
-      'jobs',
-      partial: 'job',
-      locals: { job: @job }
-    )
+    html = render_to_string(partial: 'job')
+    render operations: cable_car
+      .prepend('#jobs', html: html)
+      .dispatch_event(name: 'submit:success'), content_type: "text/vnd.cable-ready.json"
   else
-    render turbo_stream: turbo_stream.replace(
-      'job-form',
-      partial: 'form',
-      locals: { job: @job }
-    ), status: :unprocessable_entity
+    html = render_to_string(partial: 'form')
+    render operations: cable_car
+      .inner_html('#job-form', html: html), status: :unprocessable_entity, content_type: "text/vnd.cable-ready.json"
   end
 end
-
 
   # PATCH/PUT /jobs/1 or /jobs/1.json
   def update
@@ -76,14 +53,13 @@ end
   end
 
   # DELETE /jobs/1 or /jobs/1.json
-  # def destroy
-  #   @job.destroy
-  #   render operations: cable_car.remove(selector: dom_id(@job)), content_type: "text/vnd.cable-ready.json"
-  # end
-
   def destroy
-    @job.destroy
-    render turbo_stream: turbo_stream.remove(@job)
+    @job.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to jobs_url, notice: "Job was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
