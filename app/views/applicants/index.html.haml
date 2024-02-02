@@ -1,14 +1,8 @@
 .flex.items-baseline.justify-between.mb-6
   %h2.mt-6.text-3xl.font-extrabold.text-gray-700
     Applicants
-  = link_to "Add a new applicant", new_applicant_path, class: "btn-primary-outline", data: { action: "mouseup->slideover#open", remote: true }
-.flex.items-baseline.justify-between
-  .flex.flex-grow.mt-4.space-x-6.overflow-auto{"data-controller" => "drag", "data-drag-attribute-value" => "applicant[stage]", "data-drag-url-value" => "/applicants/:id/change_stage"}
-    - [:application, :interview, :offer, :hired].each do |key|
-      .flex.flex-col.flex-shrink-0.w-72
-        .flex.items-center.flex-shrink-0.h-10.px-2
-          %span.block.text-lg.font-semibold= key.to_s.humanize
-        .h-full{"data-drag-target" => "list", "data-new-value" => "#{key.to_s}", :id => "applicants-#{key}"}
-          - @applicants.where(stage: key).each do |applicant|
-            = render "card", applicant: applicant
-
+  = link_to "Add a new applicant", new_applicant_path, class: "btn-primary-outline", data: { action: "click->slideover#open", remote: true }
+.flex.mb-6.justify-end
+  = render "filter_form"
+.flex.items-baseline.justify-baseline.px-10.md:px-6
+  = render "list", grouped_applicants: @grouped_applicants
