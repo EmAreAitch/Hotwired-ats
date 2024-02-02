@@ -3,7 +3,7 @@ class Applicant < ApplicationRecord
   FILTER_PARAMS = %i[query job sort].freeze
   belongs_to :job
   has_one_attached :resume
-
+  has_many :emails, dependent: :destroy
   pg_search_scope :text_search,
   against: %i[first_name last_name email],
   using: {

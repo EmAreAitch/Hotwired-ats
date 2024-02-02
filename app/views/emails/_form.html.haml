@@ -1,0 +1,16 @@
+= form_with(model: [applicant, email], id: 'email-form', html: { class: "space-y-6" }, data: { remote: true }) do |form|
+  - if email.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(email.errors.count, "error")
+        prohibited this email from being saved:
+      %ul
+        - email.errors.each do |error|
+          %li= error.full_message
+  .form-group
+    = form.label :subject
+    .mt-1
+      = form.text_field :subject
+  .form-group
+    = form.rich_text_area :body
+  = form.submit 'Send email', class: 'btn-primary float-right'

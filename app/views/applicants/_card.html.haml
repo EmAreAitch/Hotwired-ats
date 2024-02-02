@@ -1,6 +1,6 @@
 .flex.flex-col.pb-2.overflow-auto{"data-id" => "#{applicant.id}"}
   .relative.flex.flex-col.items-start.p-4.mt-3.bg-gray-100.rounded-lg.cursor-move.bg-opacity-90.group.hover:bg-opacity-100
-    %h4.text-gray-900= link_to applicant.name, applicant, class: "cursor-pointer"
+    %h4.text-gray-900= link_to applicant.name, applicant, class: "cursor-pointer", data: {turbo_frame: '_top'}
     %p.text-sm.text-gray-700
       = applicant.job.title
       in #{applicant.job.location}

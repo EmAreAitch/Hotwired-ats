@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'resumes/show'
   resources :applicants
   resources :jobs
   devise_for :users,
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
   end
   resources :applicants do
     patch :change_stage, on: :member
+    get :resume, action: :show, controller: 'resumes'
+    resources :emails, only: %i[index new create show]
+    resources :email_replies, only: %i[new]
   end
 # Snip
 end

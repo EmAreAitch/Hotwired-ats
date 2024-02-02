@@ -1,0 +1,4 @@
+= turbo_frame_tag "emails" do
+  #emails-list.divide-y.divide-gray-500
+    - @emails.each do |email|
+      = render "list_item", email: email, applicant: @applicant

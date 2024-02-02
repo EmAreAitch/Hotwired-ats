@@ -1,27 +1,26 @@
-%p#notice= notice
-
-%p
-  %b First name:
-  = @applicant.first_name
-%p
-  %b Last name:
-  = @applicant.last_name
-%p
-  %b Email:
-  = @applicant.email
-%p
-  %b Phone:
-  = @applicant.phone
-%p
-  %b Stage:
-  = @applicant.stage
-%p
-  %b Status:
-  = @applicant.status
-%p
-  %b Job:
-  = @applicant.job
-
-= link_to 'Edit', edit_applicant_path(@applicant)
-\|
-= link_to 'Back', applicants_path
+.flex.items-baseline.justify-between.mb-6.text-gray-700
+  %h2.mt-6.text-3xl.font-extrabold
+    = @applicant.name
+  = link_to "Send email", new_applicant_email_path(@applicant), class: "btn-primary-outline", data: { action: "click->slideover#open", remote: true }
+.shadow.p-4.text-gray-700
+  .flex.justify-between.mb-6
+    .space-y-2
+      %h3.text-xl.font-bold Applicant info
+      %p= mail_to @applicant.email
+      %p= phone_to @applicant.phone
+    .space-y-2
+      %h3.text-xl.font-bold Application details
+      %p
+        Applied for #{@applicant.job.title}
+      %p
+        Applied on #{l(@applicant.created_at.to_date, format: :long)}
+    .space-y-2
+  .flex.w-full
+    .emails-container.bg-gray-100.border-2.border-gray-200.rounded.p-4.mr-2.shadow.divide-y.divide-gray-500.overflow-y-scroll{:class => "w-1/3"}
+      %h3.text-xl.font-bold Communication history
+      = turbo_stream_from @applicant, :emails
+      = turbo_frame_tag "emails", src: applicant_emails_path(@applicant), class: "max-height[1000px]"
+    - if @applicant.resume.attached?
+      = turbo_frame_tag "resume", src: applicant_resume_path(@applicant), loading: "lazy", class: "w-2/3" do
+        .w-full.bg-gray-100.rounded.flex.justify-center.items-center{:style => "height: 1000px;"}
+          Loading...
