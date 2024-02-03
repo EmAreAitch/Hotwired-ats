@@ -1,0 +1,18 @@
+%li.p-4.transition-opacity{"data-controller" => "notifications", "data-public" => "#{notification.to_global_id.to_s}", :id => "#{dom_id(notification)}"}
+  .flex.space-x-4.items-center
+    %div
+      %button{"data-action" => "click->notifications#read"}
+        = render_inline_svg "check-circle", class: "h-7 w-7 text-gray-500 hover:text-green-500", title: "Mark as read"
+        %span.sr-only Mark as read
+    %div
+      %h4.text-sm.font-medium
+        = link_to notification.message,      |
+          notification.url,                  |
+          data: {                            |
+            id: notification.id,             |
+            action: "click->slideover#open", |
+            remote: true                     |
+          }                                  |
+      %p.text-sm.text-gray-500
+        = time_ago_in_words(notification.created_at)
+        ago

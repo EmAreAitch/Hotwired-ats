@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'resumes/show'
   resources :applicants
   resources :jobs
+  resources :notifications, only: %i[index]
   devise_for :users,
   path: '',
   controllers: {

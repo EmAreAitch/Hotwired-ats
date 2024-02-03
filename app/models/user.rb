@@ -9,7 +9,7 @@ class User < ApplicationRecord
   
   has_many :emails, dependent: :destroy
   after_create_commit :generate_alias
-
+  has_many :notifications, dependent: :destroy
   def generate_alias
     email_alias = "#{email.split('@')[0]}-#{id[0...4]}"
     update_column(:email_alias, email_alias)

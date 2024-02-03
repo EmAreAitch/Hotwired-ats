@@ -1,0 +1,10 @@
+#notifications-container.relative{"data-action" => "click@window->dropdown#hide", "data-controller" => "dropdown"}
+  %button#notifications-menu.py-4.px-1.relative.border-2.border-transparent.text-gray-800.rounded-full{"aria-expanded" => "false", "data-action" => "click->dropdown#toggle"}
+    %span.sr-only Notifications
+    = inline_svg_tag('bell.svg', class: "h-6 w-6")
+    - if user.notifications.unread.exists?
+      .absolute.inset-0.object-right-top.-mr-6
+        #notification-count.inline-flex.items-center.border-2.border-white.rounded-full.text-xs.font-semibold.leading-4.bg-red-500.text-white{:class => "px-1.5 py-0.5"}
+          = user.notifications.unread.count
+  .dropdown-content.absolute.w-96.h-96.overflow-y-scroll.bg-gray-100.shadow-lg.rounded-md.ring-1.ring-black.ring-opacity-5{"data-dropdown-target" => "content"}
+    = turbo_frame_tag "notifications", src: notifications_path, autoscroll: true, data: { autoscroll_block: "start" }
