@@ -27,7 +27,12 @@ Rails.application.routes.draw do
   devise_scope :user do
     root to: 'devise/sessions#new'
   end
-  resources :applicants do
+
+  concern :commentable do
+    resources :comments, only: %i[index create]
+  end
+
+  resources :applicants,concerns: :commentable do
     patch :change_stage, on: :member
     get :resume, action: :show, controller: 'resumes'
     resources :emails, only: %i[index new create show]

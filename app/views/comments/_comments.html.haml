@@ -1,0 +1,5 @@
+.text-right.mb-2
+  = link_to "View #{commentable.name}", polymorphic_path(commentable), class: "text-blue-600 hover:text-blue-700"
+= render "form", comment: Comment.new, commentable: commentable
+#comments.py-4.divide-y.divide-gray-300
+  = render comments

@@ -4,7 +4,9 @@ class Applicant < ApplicationRecord
   belongs_to :job
   has_one_attached :resume
   has_many :emails, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy, counter_cache: :commentable_count
   pg_search_scope :text_search,
+  
   against: %i[first_name last_name email],
   using: {
     tsearch: {

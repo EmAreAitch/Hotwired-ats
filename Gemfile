@@ -77,3 +77,5 @@ gem "inline_svg", "~> 1.9"
 gem "redis-session-store", "~> 0.11.5"
 
 gem "pg_search", "~> 2.3"
+
+gem "sidekiq", "~> 7.2"

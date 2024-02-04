@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include ActionText::Attachable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,6 +15,7 @@ class User < ApplicationRecord
   has_many :emails, dependent: :destroy
   after_create_commit :generate_alias
   has_many :notifications, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   def generate_alias
     email_alias = "#{email.split('@')[0]}-#{id[0...4]}"
@@ -26,5 +28,10 @@ class User < ApplicationRecord
 
   def reset_invite!(inviting_user)
     update(invited_at: Time.current, invited_by: inviting_user)
+  end
+
+
+  def to_attachable_partial_path
+    'users/mention_attachment'
   end
 end
