@@ -40,5 +40,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :users
+  resources :invites, only: %i[create update]
+  get 'invite', to: 'invites#new', as: 'accept_invite'
 # Snip
 end

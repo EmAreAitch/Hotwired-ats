@@ -9,5 +9,11 @@ module.exports = {
   mode: 'jit',
   plugins: [
     require('@tailwindcss/forms'),
+  ],
+  safelist: [
+    'border-red-500',
+    'focus:border-red-600',
+    'focus:ring-red-600',
+    'text-red-500',
   ]
 }
