@@ -33,7 +33,6 @@ class ApplicantsController < ApplicationController
     if @applicant.save
       html = render_to_string(partial: 'card', locals: { applicant: @applicant })
       render operations: cable_car
-        .prepend("#applicants-#{@applicant.stage}", html: html)
         .dispatch_event(name: 'submit:success'), content_type: 'text/vnd.cable-ready.json'
     else
       html = render_to_string(partial: 'form', locals: { applicant: @applicant })

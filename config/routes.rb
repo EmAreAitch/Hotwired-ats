@@ -32,5 +32,13 @@ Rails.application.routes.draw do
     resources :emails, only: %i[index new create show]
     resources :email_replies, only: %i[new]
   end
+
+  namespace :careers do
+    resources :accounts, only: %i[show] do
+      resources :jobs, only: %i[index show], shallow: true do
+        resources :applicants, only: %i[new create]
+      end
+    end
+  end
 # Snip
 end
