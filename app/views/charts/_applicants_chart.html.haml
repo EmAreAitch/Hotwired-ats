@@ -1,0 +1,9 @@
+#applicants-chart-container{"data-applicants-chart-labels-value" => labels, "data-applicants-chart-series-value" => series, "data-controller" => "applicants-chart", "data-turbo-cache" => "false"}
+  .flex.justify-between
+    %h3.text-xl.font-bold.text-blue-700 Applicants by hiring stage
+    %form
+      %fieldset.mb-2
+        .flex.justify-between{"data-controller" => "flatpickr"}
+          = text_field_tag "start_date", nil, class: "w-1/2 input rounded-none mr-2", placeholder: "Start date", value: 90.days.ago, data: { flatpickr_date_format: "Y-m-d",action: "change->applicants-chart#update",flatpickr_target: "start"}
+          = text_field_tag "end_date", nil,class: "w-1/2 input rounded-none mr-2",placeholder: "End date",value: Time.zone.now.to_date,data: {flatpickr_date_format: "Y-m-d",action: "change->applicants-chart#update",flatpickr_target: "end"}
+  %div{"data-applicants-chart-target" => "chart"}

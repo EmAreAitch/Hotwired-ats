@@ -1,0 +1,13 @@
+#stage-chart-container{"data-controller" => "hiring-stages", "data-hiring-stages-labels-value" => labels, "data-hiring-stages-series-value" => series, "data-turbo-cache" => "false"}
+  .flex.justify-between
+    %h3.text-xl.font-bold.text-blue-700 Applicants by hiring stage
+    %form
+      = select_tag "job_id",                                                     |
+        options_for_select(                                                      |
+          Job.for_account(current_user.account).order(:title).pluck(:title, :id) |
+        ),                                                                       |
+        include_blank: "All jobs",                                               |
+        data: {                                                                  |
+          action: "change->hiring-stages#update"                                 |
+        }                                                                        |
+  %div{"data-hiring-stages-target" => "chart"}

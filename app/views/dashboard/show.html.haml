@@ -1,4 +1,8 @@
-%h1 Dashboard#show
-%p Find me in app/views/dashboard/show.html.erb
-= button_to "Sign out", destroy_user_session_path, method: :delete
-= link_to "Career page", careers_account_path(current_user.account)
+%div
+  %h2.mt-6.text-3xl.font-extrabold.text-gray-700
+    Recruiting Dashboard
+.flex.w-full.space-x-8.sm:flex-col.md:flex-row.flex-1
+  .sm:w-full{:class => "md:w-1/2"}
+    = turbo_frame_tag "applicants_chart", src: chart_path(chart_type: "Charts::ApplicantsChart"), loading: "lazy"
+  .sm:w-full{:class => "md:w-1/2"}
+    = turbo_frame_tag "hiring_stages_chart", src: chart_path(chart_type: "Charts::HiringStagesChart"), loading: "lazy"
