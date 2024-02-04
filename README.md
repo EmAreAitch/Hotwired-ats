@@ -1,24 +1,10 @@
-# README
+# Exploring Hotwiring Rails with Turbo, Stimulus, and More
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I created this project by following the guidance from the [Hotwiring Rails Book](https://book.hotwiringrails.com/). Throughout this experience, I learned a lot about:
 
-Things you may want to cover:
+Turbo: Boosting the user experience with Turbo Drive, Frames, and Streams.
+Stimulus: Using Stimulus for creating interactive and responsive front-end elements.
+Stimulus Reflex: Integrating real-time features seamlessly with Stimulus Reflex.
+Cable Ready: Discovering the power of Cable Ready for easy WebSocket updates.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I'm really excited about this tech stack and plan to build a complete full-stack app with it. Stay tuned for more updates!
