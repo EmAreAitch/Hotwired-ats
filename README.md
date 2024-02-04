@@ -7,4 +7,4 @@ Stimulus: Using Stimulus for creating interactive and responsive front-end eleme
 Stimulus Reflex: Integrating real-time features seamlessly with Stimulus Reflex.
 Cable Ready: Discovering the power of Cable Ready for easy WebSocket updates.
 
-I'm really excited about this tech stack and plan to build a complete full-stack app with it. Stay tuned for more updates!
+I'm really excited about this tech stack and plan to build a complete full-stack app with it.
